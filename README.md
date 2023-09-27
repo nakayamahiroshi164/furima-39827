@@ -14,6 +14,7 @@
 
 ### Association
 - has_many :items
+- has_many :purchase_records
 
 ## itemsテーブル
  Column | Type | Option |
@@ -31,20 +32,22 @@
 
 ### Association
 - belongs_to :user
+- has_one : purchase_record
+
 
 ## purchase_recordsテーブル
  Column | Type | Option |
 |-|-|-|
-| user_id | integer | null: false |
-| item_id | references | null: false |foreign_key: true |
+| user_id | integer | null: false |foreign_key: true |
+| item | references | null: false |foreign_key: true |
 
 ### Association
-- has_one :items
+- has_one : shipping_addresse
 
 ## shipping_addressesテーブル
 Column | Type | Option |
 |-|-|-|
-| user_id | references | null: false |foreign_key: true |
+| user | references | null: false |
 | post_code | string | null: false |
 | prefecture | integer | null: false |
 | city | string | null: false |
@@ -52,11 +55,7 @@ Column | Type | Option |
 | building_name | string | null: false |
 | telephone_number | string | null: false |
 
-validates :post_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/ }
-validates :telephone_number, presence: true, length: { minimum: 10, maximum: 11 }, format: { with: /\A\d+\z/ }
-
 ## Association
-- belongs_to :user
-
+- has_one : purchase_records
 
 
