@@ -38,16 +38,18 @@
 ## purchase_recordsテーブル
  Column | Type | Option |
 |-|-|-|
-| user_id | references | null: false |foreign_key: true |
+| user | references | null: false |foreign_key: true |
 | item | references | null: false |foreign_key: true |
 
 ### Association
-- has_one : item
-- has_one : shipping_addresse
+- belongs_to : user
+- belongs_to : item
+- has_one : shipping_address
 
 ## shipping_addressesテーブル
 Column | Type | Option |
 |-|-|-|
+| purchase_records | references | null: false |foreign_key: true |
 | post_code | string | null: false |
 | prefecture_id | integer | null: false |
 | city | string | null: false |
@@ -56,6 +58,6 @@ Column | Type | Option |
 | telephone_number | string | null: false |
 
 ## Association
-- has_one : purchase_record
+- belongs_to : purchase_record
 
 
