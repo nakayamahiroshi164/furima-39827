@@ -38,24 +38,24 @@
 ## purchase_recordsテーブル
  Column | Type | Option |
 |-|-|-|
-| user_id | integer | null: false |foreign_key: true |
+| user_id | references | null: false |foreign_key: true |
 | item | references | null: false |foreign_key: true |
 
 ### Association
+- has_one : item
 - has_one : shipping_addresse
 
 ## shipping_addressesテーブル
 Column | Type | Option |
 |-|-|-|
-| user | references | null: false |
 | post_code | string | null: false |
-| prefecture | integer | null: false |
+| prefecture_id | integer | null: false |
 | city | string | null: false |
 | address | string | null: false |
-| building_name | string | null: false |
+| building_name | string |
 | telephone_number | string | null: false |
 
 ## Association
-- has_one : purchase_records
+- has_one : purchase_record
 
 
