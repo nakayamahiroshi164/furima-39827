@@ -49,7 +49,7 @@
 ## shipping_addressesテーブル
 Column | Type | Option |
 |-|-|-|
-| purchase_records | references | null: false |foreign_key: true |
+| purchase_record | references | null: false |foreign_key: true |
 | post_code | string | null: false |
 | prefecture_id | integer | null: false |
 | city | string | null: false |
