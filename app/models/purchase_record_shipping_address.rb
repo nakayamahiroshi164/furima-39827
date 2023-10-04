@@ -12,7 +12,6 @@ class PurchaseRecordShippingAddress
     validates :city
     validates :address
     validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
-    validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
   end
   
   def save
