@@ -11,7 +11,7 @@ class PurchaseRecordsController < ApplicationController
 
 
     def create
-      @purchase_record_shipping_address = PurchaseRecordShippingAddress.new(purchase_record_params)
+      @purchase_record_shipping_address = PurchaseRecordShippingAddress.new(purchase_record_params)       
       if @purchase_record_shipping_address.valid?
         pay_item
          @purchase_record_shipping_address.save
