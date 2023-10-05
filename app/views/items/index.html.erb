@@ -127,19 +127,17 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-      <% if @items[0] != nil%>
+
       <% @items.each do |item|%>
-      <li class='list'>
-        <%= link_to item_path(item) do %>
-        <div class='item-img-content'>
+        <li class='list'>
+          <%= link_to item_path(item) do %>
+          <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
-          <%# sold outの表示 %>
-          <%# 購入済みの場合、条件分岐 %>
+           <% if item.purchase_record != nil%>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# //購入済みの場合、条件分岐 %>
-          <%# //sold outの表示 %>
+          <% end %>
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -156,8 +154,8 @@
         <% end %>
       </li>
       <% end %>
-      <% end %>
-      <%# 商品がない場合のダミー %>
+
+      
       <% if @items.length == 0%>
       <li class='list'>
         <%= link_to '#' do %>
@@ -171,16 +169,14 @@
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
-            </div>
-          </div>
-        </div>
+           
         <% end %>
       </li>
       <% end %>
-      <%# //商品がない場合のダミー %>
+     
     </ul>
   </div>
-  <%# //商品一覧 %>
+ 
 </div>
 <%= link_to(new_item_path, class: 'purchase-btn') do %>
   <span class='purchase-btn-text'>出品する</span>
