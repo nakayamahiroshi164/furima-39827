@@ -1,6 +1,6 @@
 class PurchaseRecordShippingAddress
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :address, :building_name, :telephone_number, :item_id, :user_id
+  attr_accessor :post_code, :prefecture_id, :city, :address, :building_name, :telephone_number, :item_id, :user_id, :token
  
 
   # ここにバリデーションの処理を書く
@@ -12,6 +12,7 @@ class PurchaseRecordShippingAddress
     validates :city
     validates :address
     validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
+    validates :token
   end
   
   def save
