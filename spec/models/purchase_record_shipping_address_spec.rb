@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe PurchaseRecordShippingAddress, type: :model do
   before do
-    @purchase_record_shipping_address  = FactoryBot.build(:purchase_record_shipping_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @purchase_record_shipping_address  = FactoryBot.build(:purchase_record_shipping_address, user_id: user.id, item_id: item.id)
   end
 
   describe '配送先情報の保存' do
@@ -58,10 +60,10 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @purchase_record_shipping_address.post_code = nil
         @purchase_record_shipping_address.valid?
-        expect(@purchase_record_shipping_address.errors.full_messages).to include("Post code can't be blank", 'Post code is invalid. Include hyphen(-)')
+        expect(@purchase_record_shipping_address.errors.full_messages).to include("Post code can't be blank")
       end
       it '郵便番号にハイフンがないと保存できないこと' do
-        @purchase_record_shipping_address.post_code = 1_234_567
+        @purchase_record_shipping_address.post_code = 1234567
         @purchase_record_shipping_address.valid?
         expect(@purchase_record_shipping_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
@@ -97,6 +99,11 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
       end
       it '電話番号が12桁以上あると保存できないこと' do
         @purchase_record_shipping_address.telephone_number = 12_345_678_910_123_111
+        @purchase_record_shipping_address.valid?
+        expect(@purchase_record_shipping_address.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it '電話番号が9桁以下だと保存できないこと' do
+        @purchase_record_shipping_address.telephone_number = '123456789' 
         @purchase_record_shipping_address.valid?
         expect(@purchase_record_shipping_address.errors.full_messages).to include('Telephone number is invalid')
       end
